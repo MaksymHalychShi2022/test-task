@@ -5,7 +5,7 @@
 ## Run code with docker compose
 ```shell
 docker compose build
-docker comopose up
+docker compose up
 ```
 
 ## Run code manually 
