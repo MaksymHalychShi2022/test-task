@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations app && \
+                      python manage.py migrate && \
+                      python manage.py create_superuser && \
+                      python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/code
+    depends_on:
+      - db
